@@ -3,7 +3,7 @@
     <v-layout row align-left v-if="getID">
       <v-flex xs12 d-flex>
         <ol>
-          <li v-for="result in results" :key="result.id">
+          <li v-for="(result, index) in results" :key="result.id">
             <div class="title">
               <a href="result.url">{{result.title}}</a>
             </div>
@@ -13,7 +13,11 @@
             <div class="snip">
               {{result.snippet}}
             </div>
+            <div>
+              <relevance :num='index' @update="updateRelevance"/>
+            </div>
           </li>
+          <v-btn v-on:click="subResponse">Submit Responses</v-btn>
         </ol>
       </v-flex>
     </v-layout>
@@ -22,11 +26,15 @@
 
 <script>
 import QueryService from '@/services/QueryService'
+import Relevance from '@/components/Relevance.vue'
 export default {
+  components: {
+    Relevance
+  },
   data () {
     return {
-      results: []
-
+      results: [],
+      clicked: [null, null, null, null, null, null, null, null, null, null]
     }
   },
   computed: {
@@ -45,6 +53,25 @@ export default {
   methods: {
     getResults: async function (myVal) {
       this.results = (await QueryService.results({ 'id': myVal })).data
+    },
+    updateRelevance (newValue, index) {
+      this.clicked[index] = newValue
+    },
+    subResponse: function () {
+      var toSave = []
+      var rel = ['Definitely Relevant', 'Possibly Relevant', 'Not Relevant']
+      for (var index = 0; index < 10; index++) {
+        var result = {
+          userID: this.$store.getters.getUID,
+          // Make sure to fix resultID
+          resultID: index * 10,
+          rank: index,
+          relevance: rel[this.clicked[index]]
+        }
+        toSave.push(result)
+      }
+      console.log(toSave)
+      QueryService.relevance(toSave)
     }
   }
 }

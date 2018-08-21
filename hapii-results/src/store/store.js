@@ -6,6 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   strict: true,
   state: {
+    userID: 1,
     qID: null,
     queryReady: false
   },
@@ -27,6 +28,9 @@ export default new Vuex.Store({
   getters: {
     getID: state => {
       return state.qID
+    },
+    getUID: state => {
+      return state.userID
     }
   }
 })

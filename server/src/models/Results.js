@@ -1,5 +1,12 @@
 module.exports = function (sequelize, DataTypes) {
   return sequelize.define('results', {
+    // id: {
+    //   type: DataTypes.INTEGER(11),
+    //   allowNull: false,
+    //   primaryKey: true,
+    //   autoIncrement: true,
+    //   field: 'ID'
+    // },
     qId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,

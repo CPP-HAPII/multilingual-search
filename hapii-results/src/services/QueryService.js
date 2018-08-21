@@ -6,5 +6,8 @@ export default {
   },
   results (qID) {
     return Api().post('results', qID)
+  },
+  relevance (values) {
+    return Api().post('relevance', values)
   }
 }
