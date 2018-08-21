@@ -34,7 +34,8 @@ export default {
   data () {
     return {
       results: [],
-      clicked: [null, null, null, null, null, null, null, null, null, null]
+      clicked: [null, null, null, null, null, null, null, null, null, null],
+      qID: this.$store.state.route.params.queryID
     }
   },
   computed: {
@@ -45,11 +46,15 @@ export default {
       return id
     }
   },
-  // watch: {
-  //   getID () {
-  //     this.getResults(this.$store.getters.getID)
-  //   }
-  // },
+  beforeRouteUpdate (to, from, next) {
+    this.qID = to.params.queryID
+    next()
+  },
+  watch: {
+    qID: function () {
+      this.getResults()
+    }
+  },
   methods: {
     getResults: async function (myVal) {
       this.results = (await QueryService.results({ 'id': myVal })).data
@@ -71,7 +76,15 @@ export default {
         toSave.push(result)
       }
       console.log(toSave)
-      QueryService.relevance(toSave)
+      // QueryService.relevance(toSave)
+      var qID = parseInt(this.$store.state.route.params.queryID) + 1
+      console.log(qID)
+      if (qID < 10) {
+        this.$store.dispatch('setqID', qID)
+        this.$router.push(`/query/${qID}`)
+      } else {
+        this.$router.push('/thanks')
+      }
     }
   }
 }

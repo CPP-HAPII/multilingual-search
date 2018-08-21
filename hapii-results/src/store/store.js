@@ -6,9 +6,11 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   strict: true,
   state: {
-    userID: 1,
-    qID: null,
-    queryReady: false
+    userID: null,
+    qID: 1,
+    queryReady: true,
+    loggedIn: false,
+    redirect: true
   },
   mutations: {
     setqID (state, qID) {
@@ -18,11 +20,24 @@ export default new Vuex.Store({
       } else {
         state.queryReady = false
       }
+    },
+    setUserID (state, userID) {
+      state.userID = userID
+      if (userID) {
+        state.loggedIn = true
+        state.redirect = false
+      } else {
+        state.loggedIn = false
+        state.redirect = true
+      }
     }
   },
   actions: {
     setqID ({commit}, qID) {
       commit('setqID', qID)
+    },
+    setUserID ({commit}, userID) {
+      commit('setUserID', userID)
     }
   },
   getters: {

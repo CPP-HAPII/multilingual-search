@@ -7,7 +7,8 @@
           <router-view></router-view>
         </v-container>
       </main>
-      <result v-if="$store.state.queryReady"/>
+      <!-- <query v-if="$store.state.loggedIn"/>
+      <result v-if="$store.state.loggedIn"/> -->
     </v-app>
     <head>
       <!-- Material icons used for Vuetify -->
@@ -18,10 +19,12 @@
 
 <script>
 import Result from '@/components/Result.vue'
+import Query from '@/components/Query.vue'
 export default {
   name: 'app',
   components: {
-    Result
+    Result,
+    Query
   }
 }
 </script>
