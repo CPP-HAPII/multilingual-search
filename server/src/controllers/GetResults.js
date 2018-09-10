@@ -3,7 +3,7 @@ const {results} = require('../models')
 module.exports = {
   async getResults (req, res) {
     try {
-      await results.findAll({where: {qID: req.body.id}, limit: 10}).then(result => {
+      await results.findAll({where: {qID: req.body.id}, limit: 6}).then(result => {
         res.send(result)
       })
     } catch (err) {

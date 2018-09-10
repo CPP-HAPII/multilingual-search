@@ -9,8 +9,8 @@ export default new Vuex.Store({
     userID: null,
     qID: 1,
     queryReady: true,
-    loggedIn: false,
-    redirect: true
+    loggedIn: true,
+    redirect: false
   },
   mutations: {
     setqID (state, qID) {

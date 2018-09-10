@@ -1,11 +1,12 @@
 <template>
-  <v-container fluid grid-list-xl>
+  <v-container fluid grid-list-xl pa-0>
     <v-layout row align-left v-if="getID">
-      <v-flex xs12 d-flex>
+      <v-flex xs4 d-flex>
         <ol>
           <li v-for="(result, index) in results" :key="result.id">
-            <div class="title">
-              <a href="result.url">{{result.title}}</a>
+            <div class="title"><font size="4">
+              {{result.title}}
+            </font>
             </div>
             <div class="url">
               {{result.url}}
@@ -34,7 +35,7 @@ export default {
   data () {
     return {
       results: [],
-      clicked: [null, null, null, null, null, null, null, null, null, null],
+      clicked: [null, null, null, null, null, null],
       qID: this.$store.state.route.params.queryID
     }
   },
@@ -65,7 +66,7 @@ export default {
     subResponse: function () {
       var toSave = []
       var rel = ['Definitely Relevant', 'Possibly Relevant', 'Not Relevant']
-      for (var index = 0; index < 10; index++) {
+      for (var index = 0; index < 6; index++) {
         var result = {
           userID: this.$store.getters.getUID,
           // Make sure to fix resultID
@@ -92,15 +93,24 @@ export default {
 
 <style scoped>
   li {
-    margin-bottom: 20px;
+    margin-bottom: 20px
   }
   div {
     text-align: left
   }
   div.snip {
-    word-wrap: break-word
+    word-wrap: break-word;
+    overflow: hidden;
+    height: 40px;
   }
   div.url {
-    color: green
+    color: green;
+    white-space: nowrap;
+    width: 570px;
+    overflow: hidden;
+    text-overflow: ellipsis
+  }
+  div.title {
+    color: blue
   }
 </style>

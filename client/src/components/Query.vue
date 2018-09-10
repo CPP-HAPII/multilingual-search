@@ -1,10 +1,10 @@
 <template>
-  <v-container fluid grid-list-xl>
+  <v-container fluid grid-list-xl pa-0>
     <v-layout row wrap align-center v-if="$store.state.loggedIn">
-      <v-flex xs12 d-flex>
+      <v-flex xs12 d-flex pa-0>
         <v-subheader>Description: {{desc}}</v-subheader>
       </v-flex>
-      <v-flex xs12 sm6 d-flex offset-sm3>
+      <v-flex xs4 d-flex offset-sm3 pa-0>
         <v-text-field
           :value="query"
           label="Query"

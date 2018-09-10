@@ -3,7 +3,7 @@
     <v-app>
       <!-- <page-home/> -->
       <main>
-        <v-container fluid>
+        <v-container fluid pa-0>
           <router-view></router-view>
         </v-container>
       </main>
@@ -36,6 +36,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 0px;
 }
 </style>
