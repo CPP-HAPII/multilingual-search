@@ -2,6 +2,7 @@ const GetQuery = require('./controllers/GetQuery')
 const GetResults = require('./controllers/GetResults')
 const PostRelevance = require('./controllers/PostRelevance')
 const Authentication = require('./controllers/Authentication.js')
+const GetQuestions = require('./controllers/GetQuestions.js')
 
 module.exports = (app) => {
   app.get('/queries',
@@ -16,4 +17,6 @@ module.exports = (app) => {
     PostRelevance.postRelevance)
   app.post('/register',
     Authentication.createUser)
+  app.post('/questions',
+    GetQuestions.getQuestions)
 }

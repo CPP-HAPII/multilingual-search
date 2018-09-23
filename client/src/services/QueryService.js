@@ -15,5 +15,8 @@ export default {
   },
   show (queryID) {
     return Api().get(`query/${queryID}`)
+  },
+  questions (range) {
+    return Api().post('questions', range)
   }
 }

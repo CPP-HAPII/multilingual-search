@@ -4,13 +4,16 @@
       <v-flex xs12 d-flex pa-0>
         <v-subheader>Description: {{desc}}</v-subheader>
       </v-flex>
-      <v-flex xs4 d-flex offset-sm3 pa-0>
+      <v-flex xs12 d-flex pa-0>
+        <v-subheader>Query: {{query}}</v-subheader>
+      </v-flex>
+      <!-- <v-flex xs4 d-flex offset-sm3 pa-0>
         <v-text-field
           :value="query"
           label="Query"
           readonly
         ></v-text-field>
-      </v-flex>
+      </v-flex> -->
     </v-layout>
     <result v-if="$store.state.loggedIn"/>
   </v-container>
