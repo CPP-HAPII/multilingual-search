@@ -18,7 +18,7 @@
               <relevance :num='index' @update="updateRelevance"/>
             </div>
           </li>
-          <v-btn v-on:click="subResponse">Submit Responses</v-btn>
+          <v-btn v-on:click="subResponse">Next</v-btn>
         </ol>
       </v-flex>
     </v-layout>
@@ -36,9 +36,12 @@ export default {
     return {
       results: [],
       clicked: [null, null, null, null, null, null],
-      qID: this.$store.state.route.params.queryID
+      qID: null
     }
   },
+  // async mounted (){
+  //   getResults
+  // },
   computed: {
     getID () {
       // console.log(this.$store.getters.getID)
@@ -58,7 +61,35 @@ export default {
   },
   methods: {
     getResults: async function (myVal) {
-      this.results = (await QueryService.results({ 'id': myVal })).data
+      var r1 = (await QueryService.results({ 'id': myVal })).data
+      // var q2 = myVal + 1
+      var r2 = (await QueryService.results({ 'id': 10 })).data
+      var uid = this.$store.getters.getUID
+      var sequence = [
+        [1, 2, 0, 3, 4],
+        [4, 0, 3, 1, 2],
+        [2, 3, 2, 0, 1],
+        [2, 3, 1, 4, 0],
+        [0, 1, 4, 2, 3]
+      ]
+      var row = uid % 5
+      var column = this.$store.getters.getID % 5
+      var decider = sequence[row][column]
+      this.results = []
+      // console.log(row)
+      // console.log(column)
+      if (decider === 0) {
+        this.results = r1
+      } else if (decider === 1) {
+        this.results = r2
+      } else if (decider === 2) {
+        this.results.push(r1[0], r1[1], r1[2], r2[0], r2[1], r2[2])
+      } else if (decider === 3) {
+        this.results.push(r2[0], r2[1], r2[2], r1[0], r1[1], r1[2])
+      } else if (decider === 4) {
+        this.results.push(r1[0], r2[0], r1[1], r2[1], r1[2], r2[2])
+      }
+      // console.log(this.results)
     },
     updateRelevance (newValue, index) {
       this.clicked[index] = newValue
@@ -76,15 +107,15 @@ export default {
         }
         toSave.push(result)
       }
-      console.log(toSave)
+      // console.log(toSave)
       // QueryService.relevance(toSave)
       var qID = parseInt(this.$store.state.route.params.queryID) + 1
-      console.log(qID)
+      // console.log(qID)
       if (qID < 10) {
         this.$store.dispatch('setqID', qID)
         this.$router.push(`/query/${qID}`)
       } else {
-        this.$router.push('/thanks')
+        this.$router.push('/questionnaire/3')
       }
     }
   }

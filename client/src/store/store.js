@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   strict: true,
   state: {
-    userID: null,
+    userID: 4,
     qID: 1,
     queryReady: true,
     loggedIn: true,

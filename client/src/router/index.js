@@ -5,7 +5,9 @@ import Home from '@/components/Home'
 import Login from '@/components/Login'
 import Thanks from '@/components/Thanks'
 import Query from '@/components/Query'
-import Questionaire from '@/components/Questionaire'
+import Questionnaire1 from '@/components/Questionnaire-1'
+import Questionnaire2 from '@/components/Questionnaire-2'
+import Questionnaire3 from '@/components/Questionnaire-3'
 import quest from '@/components/Question'
 
 Vue.use(Router)
@@ -21,9 +23,19 @@ export default new Router({
       component: Home
     },
     {
-      path: '/questionaire',
-      name: 'questionaire',
-      component: Questionaire
+      path: '/questionnaire/1',
+      name: 'questionnaire-1',
+      component: Questionnaire1
+    },
+    {
+      path: '/questionnaire/2',
+      name: 'questionnaire-2',
+      component: Questionnaire2
+    },
+    {
+      path: '/questionnaire/3',
+      name: 'questionnaire-3',
+      component: Questionnaire3
     },
     {
       path: '/quest',

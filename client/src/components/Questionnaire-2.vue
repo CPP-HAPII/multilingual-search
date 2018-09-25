@@ -2,7 +2,7 @@
   <v-container fluid grid-list-xl>
     <v-layout row wrap align-center>
       <v-flex xs12 d-flex>
-        <v-subheader>Questionaire 1</v-subheader>
+        <v-subheader>Questionnaire 2</v-subheader>
       </v-flex>
     </v-layout>
     <v-layout row align-left>
@@ -14,6 +14,11 @@
             </div>
           </li>
         </ol>
+      </v-flex>
+    </v-layout>
+    <v-layout row align-left>
+      <v-flex xs4 d-flex>
+        <v-btn v-on:click="Continue">Next</v-btn>
       </v-flex>
     </v-layout>
   </v-container>
@@ -38,6 +43,11 @@ export default {
   },
   components: {
     Question
+  },
+  methods: {
+    Continue: function () {
+      this.$router.push('/query/1')
+    }
   }
 }
 </script>

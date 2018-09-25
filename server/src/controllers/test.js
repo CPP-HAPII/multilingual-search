@@ -1,6 +1,4 @@
 const {results} = require('../models')
-const Sequelize = require('sequelize')
-const Op = Sequelize.Op
 
 module.exports = {
   async testJoin (req, res) {

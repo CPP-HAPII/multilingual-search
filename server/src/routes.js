@@ -3,7 +3,7 @@ const GetResults = require('./controllers/GetResults')
 const PostRelevance = require('./controllers/PostRelevance')
 const Authentication = require('./controllers/Authentication.js')
 const GetQuestions = require('./controllers/GetQuestions.js')
-const Testing = require('.controllers/test.js')
+const Testing = require('./controllers/test.js')
 
 module.exports = (app) => {
   app.get('/queries',

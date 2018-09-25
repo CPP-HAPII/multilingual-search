@@ -47,7 +47,7 @@ export default {
       var response = (await AuthenticationServices.register(credentials)).data
       console.log(response.id)
       this.$store.dispatch('setUserID', response.id)
-      this.$router.push('/query/1')
+      this.$router.push('/questionnaire/1')
     }
   }
 }
