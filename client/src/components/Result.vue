@@ -3,7 +3,8 @@
     <v-layout row align-left v-if="getID">
       <v-flex xs4 d-flex>
         <ol>
-          <li v-for="(result, index) in results" :key="result.id">
+          <li v-for="(result, index) in results" :key="result.qId">
+            <div>{{result.id}}</div>
             <div class="title"><font size="4">
               {{result.title}}
             </font>
@@ -93,6 +94,7 @@ export default {
     },
     updateRelevance (newValue, index) {
       this.clicked[index] = newValue
+      console.log('index: ' + index + ', value: ' + newValue)
     },
     subResponse: function () {
       var toSave = []
@@ -110,7 +112,8 @@ export default {
       // console.log(toSave)
       // QueryService.relevance(toSave)
       var qID = parseInt(this.$store.state.route.params.queryID) + 1
-      // console.log(qID)
+      // this.clicked = [null, null, null, null, null, null]
+      // console.log(this.clicked)
       if (qID < 10) {
         this.$store.dispatch('setqID', qID)
         this.$router.push(`/query/${qID}`)

@@ -1,17 +1,19 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import createPersistedState from 'vuex-persistedstate'
+// import Cookies from 'js-cookie'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   strict: true,
   state: {
-    userID: 4,
+    userID: null,
     qID: 1,
     queryReady: true,
-    loggedIn: true,
-    redirect: false
+    loggedIn: false,
+    redirect: true
   },
+  plugins: [createPersistedState()],
   mutations: {
     setqID (state, qID) {
       state.qID = qID
@@ -48,4 +50,15 @@ export default new Vuex.Store({
       return state.userID
     }
   }
+  // plugins: [
+  //   createPersistedState({
+  //     storage: {
+  //       getItem: key => Cookies.get(key),
+  //       // Please see https://github.com/js-cookie/js-cookie#json, on how to handle JSON.
+  //       setItem: (key, value) =>
+  //         Cookies.set(key, value, { expires: 3, secure: true }),
+  //       removeItem: key => Cookies.remove(key)
+  //     }
+  //   })
+  // ]
 })

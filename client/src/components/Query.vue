@@ -1,11 +1,11 @@
 <template>
-  <v-container fluid grid-list-xl pa-0>
-    <v-layout row wrap align-center v-if="$store.state.loggedIn">
-      <v-flex xs12 d-flex pa-0>
-        <v-subheader>Description: {{desc}}</v-subheader>
+  <v-container fluid grid-list-xl pa-0 ma-0>
+    <v-layout class="query" row wrap align-center v-if="$store.state.loggedIn">
+      <v-flex class="desc" xs12 d-flex pa-0>
+        <v-list-tile class="desc" color="black">Description: {{desc}}</v-list-tile>
       </v-flex>
-      <v-flex xs12 d-flex pa-0>
-        <v-subheader>Query: {{query}}</v-subheader>
+      <v-flex class="desc" xs12 d-flex pa-0>
+        <v-list-tile class="desc" color="black">Query: {{query}}</v-list-tile>
       </v-flex>
       <!-- <v-flex xs4 d-flex offset-sm3 pa-0>
         <v-text-field
@@ -63,5 +63,13 @@ export default {
 </script>
 
 <style scoped>
-
+  .query {
+    max-height: 80px;
+  }
+  .desc {
+    max-height: 40px;
+  }
+  .v-list-tile {
+    max-height: 40px;
+  }
 </style>
