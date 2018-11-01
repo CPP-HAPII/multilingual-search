@@ -46,6 +46,8 @@ export default {
   },
   methods: {
     Continue: function () {
+      this.$store.dispatch('setUserID', null)
+      console.log(this.$store.getters.getUID)
       this.$router.push('/thanks')
     }
   }
