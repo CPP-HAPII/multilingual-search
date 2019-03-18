@@ -1,8 +1,8 @@
 <template>
   <v-container fluid grid-list-xl pa-0>
     <v-layout row align-left v-if="getID">
-      <v-flex xs4 d-flex>
-        <ol>
+      <v-flex xs4 d-flex offset-xs4>
+        <ul>
           <li v-for="(result, index) in results" :key="result.qId">
             <div>{{result.id}}</div>
             <div class="title"><font size="4">
@@ -20,7 +20,7 @@
             </div>
           </li>
           <v-btn v-on:click="subResponse">Next</v-btn>
-        </ol>
+        </ul>
       </v-flex>
     </v-layout>
   </v-container>
@@ -126,6 +126,9 @@ export default {
 </script>
 
 <style scoped>
+  ul {
+    list-style-type: none;
+  }
   li {
     margin-bottom: 20px
   }

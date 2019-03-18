@@ -1,10 +1,10 @@
 <template>
-  <v-container fluid grid-list-xl pa-0 ma-0>
-    <v-layout class="query" row wrap align-center v-if="$store.state.loggedIn">
-      <v-flex class="desc" xs12 d-flex pa-0>
+  <v-container pt-0 mt-0 fluid grid-list-xl >
+    <v-layout class="query" pb-5 mb-0 row wrap align-center v-if="$store.state.loggedIn">
+      <v-flex class="desc" pa-0 xs12 d-flex offset-xs4>
         <v-list-tile class="desc" color="black">Description: {{desc}}</v-list-tile>
       </v-flex>
-      <v-flex class="desc" xs12 d-flex pa-0>
+      <v-flex class="desc" pa-0 xs12 d-flex offset-xs4>
         <v-list-tile class="desc" color="black">Query: {{query}}</v-list-tile>
       </v-flex>
       <!-- <v-flex xs4 d-flex offset-sm3 pa-0>
@@ -64,10 +64,11 @@ export default {
 
 <style scoped>
   .query {
-    max-height: 80px;
+    max-height: 100px;
+    /* height: 60px; */
   }
   .desc {
-    max-height: 40px;
+    max-height: 30px;
   }
   .v-list-tile {
     max-height: 40px;

@@ -11,7 +11,8 @@ export default new Vuex.Store({
     qID: 1,
     queryReady: true,
     loggedIn: false,
-    redirect: true
+    redirect: true,
+    language: false
   },
   plugins: [createPersistedState()],
   mutations: {

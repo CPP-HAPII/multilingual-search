@@ -6,7 +6,7 @@ module.exports = {
     password: process.env.DB_PASS || 'CPPhapii',
     options: {
       dialect: process.env.DIALECT || 'mysql',
-      host: process.env.HOST || 'hapiidb.c5hxam6fwt9f.us-west-1.rds.amazonaws.com',
+      host: process.env.HOST || 'localhost', // 'hapiidb.c5hxam6fwt9f.us-west-1.rds.amazonaws.com',
       port: 3306,
       omitNull: true
     }
