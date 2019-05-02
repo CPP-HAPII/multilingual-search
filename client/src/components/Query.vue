@@ -1,5 +1,5 @@
 <template>
-  <v-container pt-0 mt-0 fluid grid-list-xl >
+  <v-container pa-0 ma-0 fluid grid-list-xl>
     <v-layout class="query" pb-5 mb-0 row wrap align-center v-if="$store.state.loggedIn">
       <v-flex class="desc" pa-0 xs12 d-flex offset-xs4>
         <v-list-tile class="desc" color="black">Description: {{desc}}</v-list-tile>
@@ -64,7 +64,7 @@ export default {
 
 <style scoped>
   .query {
-    max-height: 100px;
+    max-height: 80px;
     /* height: 60px; */
   }
   .desc {

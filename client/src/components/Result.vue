@@ -3,8 +3,8 @@
     <v-layout row align-left v-if="getID">
       <v-flex xs4 d-flex offset-xs4>
         <ul>
-          <li v-for="(result, index) in results" :key="result.qId">
-            <div>{{result.id}}</div>
+          <li v-for="(result, index) in results" :key="result.id">
+            <!-- <div>{{result.id}}</div> -->
             <div class="title"><font size="4">
               {{result.title}}
             </font>
@@ -15,7 +15,7 @@
             <div class="snip">
               {{result.snippet}}
             </div>
-            <div>
+            <div class="myButton">
               <relevance :num='index' @update="updateRelevance"/>
             </div>
           </li>
@@ -64,7 +64,11 @@ export default {
     getResults: async function (myVal) {
       var r1 = (await QueryService.results({ 'id': myVal })).data
       // var q2 = myVal + 1
-      var r2 = (await QueryService.results({ 'id': 10 })).data
+      var sTemp = (myVal % 7) + 3
+      // console.log(myVal)
+      // console.log(myVal + 1)
+      // console.log(sTemp)
+      var r2 = (await QueryService.results({ 'id': sTemp })).data
       var uid = this.$store.getters.getUID
       var sequence = [
         [1, 2, 0, 3, 4],
@@ -90,11 +94,19 @@ export default {
       } else if (decider === 4) {
         this.results.push(r1[0], r2[0], r1[1], r2[1], r1[2], r2[2])
       }
-      // console.log(this.results)
+      console.log(this.results)
     },
     updateRelevance (newValue, index) {
       this.clicked[index] = newValue
+      var toPost = {
+        userID: this.$store.getters.getUID,
+        resultID: this.results[index].id,
+        rank: index,
+        relevance: newValue
+      }
+      console.log(toPost)
       console.log('index: ' + index + ', value: ' + newValue)
+      QueryService.relevance(toPost)
     },
     subResponse: function () {
       var toSave = []
@@ -130,7 +142,7 @@ export default {
     list-style-type: none;
   }
   li {
-    margin-bottom: 20px
+    margin-bottom: 10px
   }
   div {
     text-align: left
@@ -149,5 +161,8 @@ export default {
   }
   div.title {
     color: blue
+  }
+  div.myButton {
+    max-height: 48px;
   }
 </style>

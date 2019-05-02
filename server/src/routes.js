@@ -14,6 +14,8 @@ module.exports = (app) => {
     GetQuery.show)
   app.post('/results',
     GetResults.getResults)
+  app.post('/relevances',
+    PostRelevance.postRelevances)
   app.post('/relevance',
     PostRelevance.postRelevance)
   app.post('/register',

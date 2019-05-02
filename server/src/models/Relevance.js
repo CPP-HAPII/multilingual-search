@@ -30,9 +30,19 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(20),
       allowNull: false,
       field: 'Relevance'
+    },
+    createdAt: {
+      type: DataTypes.DATE(3),
+      allowNull: false,
+      defaultValue: sequelize.fn('NOW', 3)
+    },
+    updatedAt: {
+      type: DataTypes.DATE(3),
+      allowNull: false,
+      defaultValue: sequelize.fn('NOW', 3)
     }
   }, {
     tableName: 'Relevance',
-    timestamps: false
+    timestamps: true
   })
 }

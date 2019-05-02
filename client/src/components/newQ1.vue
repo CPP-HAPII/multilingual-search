@@ -153,7 +153,7 @@ export default {
   },
   methods: {
     Continue: function () {
-      this.$router.push('/questionnaire/2')
+      this.$router.push('/query/1')
     }
   }
 }

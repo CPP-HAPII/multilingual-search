@@ -19,6 +19,6 @@ module.exports = function (sequelize, DataTypes) {
     }
   }, {
     tableName: 'Users',
-    timestamps: false
+    timestamps: true
   })
 }

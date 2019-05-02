@@ -10,8 +10,11 @@ export default {
   results (qID) {
     return Api().post('results', qID)
   },
-  relevance (values) {
-    return Api().post('relevance', values)
+  relevances (values) {
+    return Api().post('relevances', values)
+  },
+  relevance (value) {
+    return Api().post('relevance', value)
   },
   show (queryID) {
     return Api().get(`query/${queryID}`)
