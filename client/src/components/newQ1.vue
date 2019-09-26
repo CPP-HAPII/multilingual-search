@@ -5,82 +5,96 @@
         <v-subheader>Demographic Questionnaire</v-subheader>
       </v-flex>
     </v-layout>
-    <v-layout row align-left>
-      <v-flex xs6 d-flex>
-        <ol>
-          <li>
-            <p>What is your first language?</p>
-            <v-radio-group v-model="radio1" :mandatory="true">
-            <v-radio label="English" value="radio-1"></v-radio>
-            <v-radio label="Spanish" value="radio-2"></v-radio>
-            <v-radio label="I consider both my first language" value="radio-3"></v-radio>
-            </v-radio-group>
-          </li>
-          <li>
-            <p>What is your proficiency in English, on a scale from 1 (elementary proficiency) to 5 (native or bilingual proficiency)?</p>
-            <v-radio-group v-model="radio2" :mandatory="true">
-            <v-radio label="1" value="1"></v-radio>
-            <v-radio label="2" value="2"></v-radio>
-            <v-radio label="3" value="3"></v-radio>
-            <v-radio label="4" value="4"></v-radio>
-            <v-radio label="5" value="5"></v-radio>
-            </v-radio-group>
-          </li>
-          <li>
-            <p v-if="$store.state.language"> What is your proficiency in Chinese?</p>
-            <p v-else>What is your proficiency in Spanish</p>
-            <!-- <p> {{$store.state.language}}</p> -->
-            <v-radio-group v-model="radio3" :mandatory="true">
-            <v-radio label="1" value="1"></v-radio>
-            <v-radio label="2" value="2"></v-radio>
-            <v-radio label="3" value="3"></v-radio>
-            <v-radio label="4" value="4"></v-radio>
-            <v-radio label="5" value="5"></v-radio>
-            </v-radio-group>
-          </li>
-          <li>
-            <p>What is your country of origin?</p>
-            <v-select
-              :items="countries"
-              label='Select Country'
-              ></v-select>
-          </li>
-          <li>
-            <p>What is your age?</p>
-            <v-text-field
-              label="Enter Age"
-              placeholder=""
-              v-model="age"
-            ></v-text-field>
-          </li>
-          <li>
-            <p>How many years of experience with web search engines (e.g. Google, Bing, Yahoo, Baidu) do you have?</p>
-            <v-text-field
-              label="Enter years of experience"
-              placeholder=""
-              v-model="experience"
-            ></v-text-field>
-          </li>
-        </ol>
-      </v-flex>
-    </v-layout>
-    <v-layout row align-left>
-      <v-flex xs4 d-flex>
-        <v-btn v-on:click="Continue">Next</v-btn>
-      </v-flex>
-    </v-layout>
+    <v-form ref="demographic" v-model="valid">
+      <v-layout row align-left>
+        <v-flex xs6 d-flex>
+          <ol>
+            <li>
+              <p align="left">What is your first language?</p>
+              <v-radio-group v-model="radio1" :rules="radioRules">
+              <v-radio label="English" value="1" ></v-radio>
+              <v-radio :label="`${language}`" value="2"></v-radio>
+              <v-radio label="I consider both my first language" value="3"></v-radio>
+              </v-radio-group>
+            </li>
+            <li>
+              <p align="left">What is your proficiency in English, on a scale from 1 (elementary proficiency) to 5 (native or bilingual proficiency)?</p>
+              <v-radio-group v-model="radio2" :rules="radioRules">
+              <v-radio label="1" value="1"></v-radio>
+              <v-radio label="2" value="2"></v-radio>
+              <v-radio label="3" value="3"></v-radio>
+              <v-radio label="4" value="4"></v-radio>
+              <v-radio label="5" value="5"></v-radio>
+              </v-radio-group>
+            </li>
+            <li>
+              <p align="left">What is your proficiency in {{language}}</p>
+              <v-radio-group v-model="radio3" :rules="radioRules">
+              <v-radio label="1" value="1"></v-radio>
+              <v-radio label="2" value="2"></v-radio>
+              <v-radio label="3" value="3"></v-radio>
+              <v-radio label="4" value="4"></v-radio>
+              <v-radio label="5" value="5"></v-radio>
+              </v-radio-group>
+            </li>
+            <li>
+              <p align="left">What is your country of origin?</p>
+              <v-select
+                :items="countries"
+                label='Select Country'
+                v-model="origin"
+                :rules="[v => !!v || 'Please select a country']"
+                ></v-select>
+            </li>
+            <li>
+              <p align="left">What is your age?</p>
+              <v-text-field
+                label="Enter Age"
+                placeholder=""
+                v-model="age"
+                :rules="ageRules"
+                required
+              ></v-text-field>
+            </li>
+            <li>
+              <p align="left">How many years of experience with web search engines (e.g. Google, Bing, Yahoo, Baidu) do you have?</p>
+              <v-text-field
+                label="Enter years of experience"
+                placeholder=""
+                v-model="experience"
+                :rules="ageRules"
+              ></v-text-field>
+            </li>
+          </ol>
+        </v-flex>
+      </v-layout>
+      <v-layout row align-left>
+        <v-flex xs4 d-flex>
+          <v-btn v-on:click="Continue" :disabled="!valid">Next</v-btn>
+        </v-flex>
+      </v-layout>
+    </v-form>
   </v-container>
 </template>
 
 <script>
 import QueryService from '@/services/QueryService'
-import Question from '@/components/Question.vue'
 export default {
   data () {
     return {
+      valid: true,
+      language: this.$store.language,
+      radioRules: [
+        v => !!v || 'Please select an option'
+      ],
+      ageRules: [
+        v => !!v || 'A valid number is required',
+        v => /(?:\b|-)([1-9]{1,2}[0]?|100)\b/.test(v) || 'Please enter a valid number'
+      ],
       radio1: null,
       radio2: null,
       radio3: null,
+      origin: null,
       questions: [],
       age: null,
       experience: null,
@@ -145,15 +159,29 @@ export default {
     }
   },
   async mounted () {
-    this.questions = (await QueryService.questions(this.range)).data
-    console.log(this.questions)
+    this.language = this.$store.getters.getLanguage
   },
-  components: {
-    Question
-  },
+  // components: {
+  //   Question
+  // },
   methods: {
-    Continue: function () {
-      this.$router.push('/query/1')
+    async Continue () {
+      var secondary = this.$store.state.language ? 'Chinese' : 'Spanish'
+      var lang = ['English', secondary, 'Both']
+      var toPost = {
+        userID: this.$store.getters.getUID,
+        firstLanguage: lang[this.radio1],
+        englishProf: parseInt(this.radio2) + 1,
+        secondary: parseInt(this.radio3) + 1,
+        origin: this.origin,
+        age: parseInt(this.age),
+        experience: parseInt(this.experience)
+      }
+      var response = (await QueryService.demographic(toPost)).status
+
+      if (response === 200) {
+        this.$router.push('/query/1')
+      }
     }
   }
 }

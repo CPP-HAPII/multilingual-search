@@ -8,7 +8,7 @@ module.exports = function (sequelize, DataTypes) {
       field: 'ID'
     },
     query: {
-      type: DataTypes.STRING(45),
+      type: DataTypes.STRING(70),
       allowNull: false,
       field: 'Query'
     },

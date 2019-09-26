@@ -8,11 +8,12 @@ export default new Vuex.Store({
   strict: true,
   state: {
     userID: null,
-    qID: 1,
+    qID: null,
     queryReady: true,
     loggedIn: false,
     redirect: true,
-    language: false
+    language: false,
+    actualQuery: null
   },
   plugins: [createPersistedState()],
   mutations: {
@@ -33,6 +34,12 @@ export default new Vuex.Store({
         state.loggedIn = false
         state.redirect = true
       }
+    },
+    setLanguage (state, language) {
+      state.language = language
+    },
+    setActualQuery (state, actualQuery) {
+      state.actualQuery = actualQuery
     }
   },
   actions: {
@@ -41,6 +48,12 @@ export default new Vuex.Store({
     },
     setUserID ({commit}, userID) {
       commit('setUserID', userID)
+    },
+    setLanguage ({commit}, language) {
+      commit('setLanguage', language)
+    },
+    setActualQuery ({commit}, actualQuery) {
+      commit('setActualQuery', actualQuery)
     }
   },
   getters: {
@@ -49,6 +62,12 @@ export default new Vuex.Store({
     },
     getUID: state => {
       return state.userID
+    },
+    getLanguage: state => {
+      return state.language
+    },
+    getActualQuery: state => {
+      return state.actualQuery
     }
   }
   // plugins: [

@@ -9,8 +9,9 @@
 </template>
 
 <script>
+import QueryService from '@/services/QueryService'
 export default {
-  props: ['num'],
+  props: ['num', 'id', 'language'],
   data () {
     return {
       toggle_none: null
@@ -18,6 +19,16 @@ export default {
   },
   methods: {
     btnClick () {
+      var toPost = {
+        userID: this.$store.getters.getUID,
+        resultID: this.id,
+        rank: this.num,
+        relevance: this.toggle_none,
+        queryLanguage: this.language
+      }
+
+      QueryService.relevance(toPost)
+
       this.$emit('update', this.toggle_none, this.num)
     }
   }

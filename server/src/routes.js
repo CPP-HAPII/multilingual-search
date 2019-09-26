@@ -1,8 +1,10 @@
 const GetQuery = require('./controllers/GetQuery')
 const GetResults = require('./controllers/GetResults')
 const PostRelevance = require('./controllers/PostRelevance')
+const PostDemographic = require('./controllers/PostDemographic')
 const Authentication = require('./controllers/Authentication.js')
 const GetQuestions = require('./controllers/GetQuestions.js')
+const PostQuestionnaire = require('./controllers/PostQuestionnaire.js')
 const Testing = require('./controllers/test.js')
 
 module.exports = (app) => {
@@ -24,4 +26,8 @@ module.exports = (app) => {
     GetQuestions.getQuestions)
   app.post('/testing',
     Testing.testJoin)
+  app.post('/demographic',
+    PostDemographic.postDemographic)
+  app.post('/postQuestions', 
+    PostQuestionnaire.postQuestionnaire)
 }

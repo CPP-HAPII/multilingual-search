@@ -21,5 +21,11 @@ export default {
   },
   questions (range) {
     return Api().post('questions', range)
+  },
+  demographic (value) {
+    return Api().post('demographic', value)
+  },
+  postQuestions (value) {
+    return Api().post('postQuestions', value)
   }
 }

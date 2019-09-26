@@ -8,7 +8,8 @@ module.exports = {
       dialect: process.env.DIALECT || 'mysql',
       host: process.env.HOST || 'localhost', // 'hapiidb.c5hxam6fwt9f.us-west-1.rds.amazonaws.com',
       port: 3306,
-      omitNull: true
+      omitNull: true,
+      timezone: 'AMERICA/LOS_ANGELES'
     }
   }
 }

@@ -31,6 +31,11 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
       field: 'Relevance'
     },
+    queryLanguage: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+      field: 'QueryLanguage'
+    },
     createdAt: {
       type: DataTypes.DATE(3),
       allowNull: false,

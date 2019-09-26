@@ -1,9 +1,9 @@
 <template>
   <v-container fluid grid-list-xl pa-0>
-    <v-layout row align-left v-if="getID">
+    <v-layout row align-left v-if="getID" :key="qID">
       <v-flex xs4 d-flex offset-xs4>
         <ul>
-          <li v-for="(result, index) in results" :key="result.id">
+          <li v-for="(result, index) in results" :key="result.title">
             <!-- <div>{{result.id}}</div> -->
             <div class="title"><font size="4">
               {{result.title}}
@@ -16,7 +16,7 @@
               {{result.snippet}}
             </div>
             <div class="myButton">
-              <relevance :num='index' @update="updateRelevance"/>
+              <relevance :num='index' :id='result.id' :language='language'/>
             </div>
           </li>
           <v-btn v-on:click="subResponse">Next</v-btn>
@@ -33,41 +33,36 @@ export default {
   components: {
     Relevance
   },
+  props: ['someID', 'language'],
   data () {
     return {
       results: [],
       clicked: [null, null, null, null, null, null],
-      qID: null
+      qID: this.$store.state.route.params.queryID
     }
   },
-  // async mounted (){
-  //   getResults
-  // },
   computed: {
     getID () {
-      // console.log(this.$store.getters.getID)
-      var id = this.$store.getters.getID
+      var id = this.$store.getters.getActualQuery
+      console.log(id)
       this.getResults(id)
       return id
     }
   },
-  beforeRouteUpdate (to, from, next) {
-    this.qID = to.params.queryID
-    next()
-  },
-  watch: {
-    qID: function () {
-      this.getResults()
-    }
-  },
+  // async mounted () {
+  //   var id = this.$store.getters.getActualQuery
+  //   // this.getResults(id)
+  // },
   methods: {
     getResults: async function (myVal) {
       var r1 = (await QueryService.results({ 'id': myVal })).data
       // var q2 = myVal + 1
-      var sTemp = (myVal % 7) + 3
-      // console.log(myVal)
-      // console.log(myVal + 1)
-      // console.log(sTemp)
+      var sTemp = null
+      if (this.$store.getters.getLanguage === 'Spanish') {
+        sTemp = myVal + 20
+      } else {
+        sTemp = myVal + 14
+      }
       var r2 = (await QueryService.results({ 'id': sTemp })).data
       var uid = this.$store.getters.getUID
       var sequence = [
@@ -81,8 +76,6 @@ export default {
       var column = this.$store.getters.getID % 5
       var decider = sequence[row][column]
       this.results = []
-      // console.log(row)
-      // console.log(column)
       if (decider === 0) {
         this.results = r1
       } else if (decider === 1) {
@@ -94,39 +87,36 @@ export default {
       } else if (decider === 4) {
         this.results.push(r1[0], r2[0], r1[1], r2[1], r1[2], r2[2])
       }
-      console.log(this.results)
     },
-    updateRelevance (newValue, index) {
-      this.clicked[index] = newValue
-      var toPost = {
-        userID: this.$store.getters.getUID,
-        resultID: this.results[index].id,
-        rank: index,
-        relevance: newValue
-      }
-      console.log(toPost)
-      console.log('index: ' + index + ', value: ' + newValue)
-      QueryService.relevance(toPost)
-    },
+    // updateRelevance (newValue, index) {
+    //   this.clicked[index] = newValue
+    //   var toPost = {
+    //     userID: this.$store.getters.getUID,
+    //     resultID: this.results[index].id,
+    //     rank: index,
+    //     relevance: newValue
+    //   }
+    // QueryService.relevance(toPost)
+    // },
     subResponse: function () {
-      var toSave = []
-      var rel = ['Definitely Relevant', 'Possibly Relevant', 'Not Relevant']
-      for (var index = 0; index < 6; index++) {
-        var result = {
-          userID: this.$store.getters.getUID,
-          // Make sure to fix resultID
-          resultID: index * 10,
-          rank: index,
-          relevance: rel[this.clicked[index]]
-        }
-        toSave.push(result)
-      }
+      // var toSave = []
+      // var rel = ['Definitely Relevant', 'Possibly Relevant', 'Not Relevant']
+      // for (var index = 0; index < 6; index++) {
+      //   var result = {
+      //     userID: this.$store.getters.getUID,
+      //     // Make sure to fix resultID
+      //     resultID: index * 10,
+      //     rank: index,
+      //     relevance: rel[this.clicked[index]]
+      //   }
+      //   toSave.push(result)
+      // }
       // console.log(toSave)
       // QueryService.relevance(toSave)
       var qID = parseInt(this.$store.state.route.params.queryID) + 1
       // this.clicked = [null, null, null, null, null, null]
       // console.log(this.clicked)
-      if (qID < 10) {
+      if (qID < 15) {
         this.$store.dispatch('setqID', qID)
         this.$router.push(`/query/${qID}`)
       } else {
@@ -155,12 +145,16 @@ export default {
   div.url {
     color: green;
     white-space: nowrap;
-    width: 570px;
+    width: 600px;
     overflow: hidden;
     text-overflow: ellipsis
   }
   div.title {
-    color: blue
+    color: blue;
+    width: 600px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
   }
   div.myButton {
     max-height: 48px;
