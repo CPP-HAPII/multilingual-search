@@ -62,17 +62,17 @@ export default {
         query = (await QueryService.show(toQuery)).data
         this.language = 'Spanish'
       } else {
-        query = (await QueryService.show(toQuery + 20)).data
+        query = (await QueryService.show(toQuery + 40)).data
         this.language = 'English'
       }
     } else {
-      toQuery += 40
+      toQuery += 80
       this.$store.dispatch('setActualQuery', toQuery)
       if ((queryID % 2) === 1) {
         query = (await QueryService.show(toQuery)).data
         this.language = 'Chinese'
       } else {
-        query = (await QueryService.show(toQuery + 14)).data
+        query = (await QueryService.show(toQuery + 40)).data
         this.language = 'English'
       }
     }
@@ -95,17 +95,17 @@ export default {
           query = (await QueryService.show(toQuery)).data
           this.language = 'Spanish'
         } else {
-          query = (await QueryService.show(toQuery + 20)).data
+          query = (await QueryService.show(toQuery + 40)).data
           this.language = 'English'
         }
       } else {
-        toQuery += 40
+        toQuery += 80
         this.$store.dispatch('setActualQuery', toQuery)
         if ((queryID % 2) === 1) {
           query = (await QueryService.show(toQuery)).data
           this.language = 'Chinese'
         } else {
-          query = (await QueryService.show(toQuery + 14)).data
+          query = (await QueryService.show(toQuery + 40)).data
           this.language = 'English'
         }
       }

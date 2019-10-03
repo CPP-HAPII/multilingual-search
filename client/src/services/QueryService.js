@@ -27,5 +27,11 @@ export default {
   },
   postQuestions (value) {
     return Api().post('postQuestions', value)
+  },
+  page (value) {
+    return Api().post('page', value)
+  },
+  pageUpdate (value) {
+    return Api().post('pageUpdate', value)
   }
 }

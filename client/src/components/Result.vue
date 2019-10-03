@@ -38,7 +38,9 @@ export default {
     return {
       results: [],
       clicked: [null, null, null, null, null, null],
-      qID: this.$store.state.route.params.queryID
+      qID: this.$store.state.route.params.queryID,
+      order: null,
+      someId: null
     }
   },
   computed: {
@@ -54,14 +56,25 @@ export default {
   //   // this.getResults(id)
   // },
   methods: {
+    async makePageStuff () {
+      var toPost = {
+        userID: this.$store.getters.getUID,
+        task: parseInt(this.qID),
+        qLanguage: this.language,
+        order: this.order
+      }
+
+      var result = (await QueryService.page({toPost})).data
+      this.someId = result.id
+    },
     getResults: async function (myVal) {
       var r1 = (await QueryService.results({ 'id': myVal })).data
       // var q2 = myVal + 1
       var sTemp = null
       if (this.$store.getters.getLanguage === 'Spanish') {
-        sTemp = myVal + 20
+        sTemp = myVal + 40
       } else {
-        sTemp = myVal + 14
+        sTemp = myVal + 40
       }
       var r2 = (await QueryService.results({ 'id': sTemp })).data
       var uid = this.$store.getters.getUID
@@ -75,6 +88,7 @@ export default {
       var row = uid % 5
       var column = this.$store.getters.getID % 5
       var decider = sequence[row][column]
+      this.order = decider
       this.results = []
       if (decider === 0) {
         this.results = r1
@@ -87,6 +101,7 @@ export default {
       } else if (decider === 4) {
         this.results.push(r1[0], r2[0], r1[1], r2[1], r1[2], r2[2])
       }
+      this.makePageStuff()
     },
     // updateRelevance (newValue, index) {
     //   this.clicked[index] = newValue
@@ -98,7 +113,7 @@ export default {
     //   }
     // QueryService.relevance(toPost)
     // },
-    subResponse: function () {
+    subResponse: async function () {
       // var toSave = []
       // var rel = ['Definitely Relevant', 'Possibly Relevant', 'Not Relevant']
       // for (var index = 0; index < 6; index++) {
@@ -113,10 +128,13 @@ export default {
       // }
       // console.log(toSave)
       // QueryService.relevance(toSave)
+
+      await QueryService.pageUpdate({id: this.someId})
+
       var qID = parseInt(this.$store.state.route.params.queryID) + 1
       // this.clicked = [null, null, null, null, null, null]
       // console.log(this.clicked)
-      if (qID < 15) {
+      if (qID < 31) {
         this.$store.dispatch('setqID', qID)
         this.$router.push(`/query/${qID}`)
       } else {
