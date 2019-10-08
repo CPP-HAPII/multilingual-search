@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid grid-list-xl pa-0>
+  <v-container fluid grid-list-xl pt-1 px-0>
     <v-layout row align-left v-if="getID" :key="qID">
       <v-flex xs4 d-flex offset-xs4>
         <ul>
@@ -19,7 +19,7 @@
               <relevance :num='index' :id='result.id' :language='language'/>
             </div>
           </li>
-          <v-btn v-on:click="subResponse">Next</v-btn>
+          <v-btn align="center" v-on:click="subResponse">Next</v-btn>
         </ul>
       </v-flex>
     </v-layout>
@@ -134,7 +134,7 @@ export default {
       var qID = parseInt(this.$store.state.route.params.queryID) + 1
       // this.clicked = [null, null, null, null, null, null]
       // console.log(this.clicked)
-      if (qID < 31) {
+      if (qID < 15) {
         this.$store.dispatch('setqID', qID)
         this.$router.push(`/query/${qID}`)
       } else {
@@ -150,7 +150,7 @@ export default {
     list-style-type: none;
   }
   li {
-    margin-bottom: 10px
+    margin-bottom: 18px
   }
   div {
     text-align: left
