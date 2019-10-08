@@ -72,9 +72,9 @@ export default {
       // var q2 = myVal + 1
       var sTemp = null
       if (this.$store.getters.getLanguage === 'Spanish') {
-        sTemp = myVal + 40
+        sTemp = myVal + 36
       } else {
-        sTemp = myVal + 40
+        sTemp = myVal + 36
       }
       var r2 = (await QueryService.results({ 'id': sTemp })).data
       var uid = this.$store.getters.getUID
