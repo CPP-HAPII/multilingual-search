@@ -1,6 +1,6 @@
 <template>
   <v-container pa-0 ma-0 fluid grid-list-xl>
-    <v-layout class="query" pb-5 mb-0 row wrap align-center v-if="$store.state.loggedIn">
+    <v-layout class="query" mt-4 pb-5 mb-4 row wrap align-center v-if="$store.state.loggedIn">
       <v-flex class="desc" pa-0 xs12 d-flex offset-xs4>
         <v-list-tile class="desc" color="black">Description: {{desc}}</v-list-tile>
       </v-flex>
