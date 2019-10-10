@@ -1,6 +1,6 @@
 <template>
   <v-container pa-0 ma-0 fluid grid-list-xl>
-    <v-layout class="query" pb-5 mb-0 row wrap align-center v-if="$store.state.loggedIn">
+    <v-layout class="query" mt-4 pb-5 mb-4 row wrap align-center v-if="$store.state.loggedIn">
       <v-flex class="desc" pa-0 xs12 d-flex offset-xs4>
         <v-list-tile class="desc" color="black">Description: {{desc}}</v-list-tile>
       </v-flex>
@@ -95,7 +95,7 @@ export default {
           query = (await QueryService.show(toQuery)).data
           this.language = 'Spanish'
         } else {
-          query = (await QueryService.show(toQuery + 32)).data
+          query = (await QueryService.show(toQuery + 36)).data
           this.language = 'English'
         }
       } else {
@@ -105,7 +105,7 @@ export default {
           query = (await QueryService.show(toQuery)).data
           this.language = 'Chinese'
         } else {
-          query = (await QueryService.show(toQuery + 32)).data
+          query = (await QueryService.show(toQuery + 36)).data
           this.language = 'English'
         }
       }
@@ -145,7 +145,6 @@ export default {
         [28, 29, 27, 30, 26, 1, 25, 2, 24, 3, 23, 4, 22, 5, 21, 6, 20, 7, 19, 8, 18, 9, 17, 10, 16, 11, 15, 12, 14, 13],
         [29, 30, 28, 1, 27, 2, 26, 3, 25, 4, 24, 5, 23, 6, 22, 7, 21, 8, 20, 9, 19, 10, 18, 11, 17, 12, 16, 13, 15, 14],
         [30, 1, 29, 2, 28, 3, 27, 4, 26, 5, 25, 6, 24, 7, 23, 8, 22, 9, 21, 10, 20, 11, 19, 12, 18, 13, 17, 14, 16, 15]
-
       ]
       var userIndex = this.$store.getters.getUID % 30
       var query = id
