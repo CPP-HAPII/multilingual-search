@@ -134,7 +134,7 @@ export default {
       var qID = parseInt(this.$store.state.route.params.queryID) + 1
       // this.clicked = [null, null, null, null, null, null]
       // console.log(this.clicked)
-      if (qID < 15) {
+      if (qID < 31) {
         this.$store.dispatch('setqID', qID)
         this.$router.push(`/query/${qID}`)
       } else {

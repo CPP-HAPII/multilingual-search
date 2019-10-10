@@ -11,6 +11,7 @@ import Questionnaire2 from '@/components/Questionnaire-2'
 import newQ1 from '@/components/newQ1'
 import quest from '@/components/Question'
 import postQuestion from '@/components/PostQuestion'
+import base from '@/components/base'
 
 Vue.use(Router)
 
@@ -58,6 +59,11 @@ export default new Router({
       path: '/query/:queryID',
       name: 'query',
       component: Query
+    },
+    {
+      path: '/base',
+      name: 'base',
+      component: base
     }
   ]
 })

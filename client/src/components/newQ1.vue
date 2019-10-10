@@ -180,7 +180,7 @@ export default {
       var response = (await QueryService.demographic(toPost)).status
 
       if (response === 200) {
-        this.$router.push('/query/1')
+        this.$router.push('/base')
       }
     }
   }
