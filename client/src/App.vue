@@ -12,7 +12,7 @@
     </v-app>
     <head>
       <!-- Material icons used for Vuetify -->
-      <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+      <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons|Material+Icons+Outlined' rel="stylesheet">
     </head>
   </div>
 </template>

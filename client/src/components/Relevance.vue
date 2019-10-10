@@ -1,10 +1,14 @@
 <template>
   <v-flex sm4>
     <v-btn-toggle v-model="toggle_none" @change="btnClick">
-      <v-btn color="success" small block></v-btn>
+      <v-btn :disabled="grnDisable" color="success" small block>
+        <v-icon>check_circle_outline</v-icon>
+      </v-btn>
       <!-- <v-btn color="warning" small></v-btn> -->
-      <v-btn color="error" small></v-btn>
-      </v-btn-toggle>
+      <v-btn :disabled="redDisable" color="error" small>
+        <v-icon class="material-icons-outlined">cancel</v-icon>
+      </v-btn>
+    </v-btn-toggle>
   </v-flex>
 </template>
 
@@ -14,11 +18,18 @@ export default {
   props: ['num', 'id', 'language'],
   data () {
     return {
-      toggle_none: null
+      toggle_none: null,
+      redDisable: false,
+      grnDisable: false
     }
   },
   methods: {
     btnClick () {
+      if (this.toggle_none === 0) {
+        this.redDisable = true
+      } else if (this.toggle_none === 1) {
+        this.grnDisable = true
+      }
       var toPost = {
         userID: this.$store.getters.getUID,
         resultID: this.id,

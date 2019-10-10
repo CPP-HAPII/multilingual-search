@@ -81,12 +81,12 @@ export default {
       var sequence = [
         [1, 2, 0, 3, 4],
         [4, 0, 3, 1, 2],
-        [2, 3, 2, 0, 1],
+        [3, 4, 2, 0, 1],
         [2, 3, 1, 4, 0],
         [0, 1, 4, 2, 3]
       ]
       var row = uid % 5
-      var column = this.$store.getters.getID % 5
+      var column = this.$store.state.route.params.queryID % 5
       var decider = sequence[row][column]
       this.order = decider
       this.results = []
