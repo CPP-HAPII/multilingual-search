@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid pa-0>
+  <v-container fluid pa-0 >
     <v-btn v-on:click="goNext" icon x-large>
       <v-icon class="material-icons-outlined">cancel</v-icon>
     </v-btn>
