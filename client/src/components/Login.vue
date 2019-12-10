@@ -73,7 +73,7 @@ export default {
         hash = ((hash << 5) - hash) + char
         hash = hash & hash
       }
-      return hash
+      return Math.abs(hash)
     }
   }
 }

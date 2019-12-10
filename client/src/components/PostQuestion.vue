@@ -101,10 +101,10 @@ export default {
     async Continue () {
       var toPost = {
         userID: this.$store.getters.getUID,
-        q1: parseInt(this.radio1) + 1,
-        q2: parseInt(this.radio2) + 1,
-        q3: parseInt(this.radio3) + 1,
-        q4: parseInt(this.radio4) + 1,
+        q1: parseInt(this.radio1),
+        q2: parseInt(this.radio2),
+        q3: parseInt(this.radio3),
+        q4: parseInt(this.radio4),
         experience: this.experience
       }
 

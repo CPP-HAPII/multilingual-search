@@ -170,9 +170,9 @@ export default {
       var lang = ['English', secondary, 'Both']
       var toPost = {
         userID: this.$store.getters.getUID,
-        firstLanguage: lang[this.radio1],
-        englishProf: parseInt(this.radio2) + 1,
-        secondary: parseInt(this.radio3) + 1,
+        firstLanguage: lang[this.radio1 - 1],
+        englishProf: parseInt(this.radio2),
+        secondary: parseInt(this.radio3),
         origin: this.origin,
         age: parseInt(this.age),
         experience: parseInt(this.experience)

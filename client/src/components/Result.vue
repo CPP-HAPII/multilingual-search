@@ -5,9 +5,8 @@
         <ul>
           <li v-for="(result, index) in results" :key="result.title">
             <!-- <div>{{result.id}}</div> -->
-            <div class="title"><font size="4">
+            <div class="title">
               {{result.title}}
-            </font>
             </div>
             <div class="url">
               {{result.url}}
@@ -165,14 +164,16 @@ export default {
     white-space: nowrap;
     width: 600px;
     overflow: hidden;
-    text-overflow: ellipsis
+    text-overflow: ellipsis;
+    font-size: 16px
   }
   div.title {
     color: blue;
     width: 600px;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis
+    text-overflow: ellipsis;
+    font-size: 20px
   }
   div.myButton {
     max-height: 48px;
